@@ -1,0 +1,914 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gerardo Heredia Azcarate | Senior Software Engineer</title>
+  <meta name="description" content="Gerardo Heredia Azcarate — Senior Software Engineer. Distributed systems, cloud-native architecture, microservices, AI-powered applications." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #f7f5f0;
+      --bg-alt: #ece8e1;
+      --surface: #ffffff;
+      --surface-hover: #f3f0ea;
+      --border: rgba(30, 41, 59, .1);
+      --text: #1e293b;
+      --text-muted: #64748b;
+      --accent: #0f766e;
+      --accent-light: #14b8a6;
+      --accent-soft: rgba(15, 118, 110, .1);
+      --accent-glow: rgba(15, 118, 110, .2);
+      --accent-border: rgba(15, 118, 110, .22);
+      --accent-border-strong: rgba(15, 118, 110, .4);
+      --header-bg: rgba(247, 245, 240, .92);
+      --shadow: rgba(30, 41, 59, .1);
+      --modal-backdrop: rgba(30, 41, 59, .55);
+      --btn-text: #ffffff;
+      --radius: 12px;
+      --radius-lg: 20px;
+      --container: 1080px;
+      --header-h: 72px;
+      --font: "DM Sans", system-ui, sans-serif;
+      --mono: "JetBrains Mono", monospace;
+      --transition: .2s ease;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: var(--font);
+      font-size: 16px;
+      line-height: 1.6;
+      color: var(--text);
+      background: var(--bg);
+      background-image:
+        radial-gradient(circle at 20% 10%, rgba(15,118,110,.06) 0%, transparent 45%),
+        radial-gradient(circle at 80% 90%, rgba(15,118,110,.04) 0%, transparent 40%);
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: inherit; text-decoration: none; }
+    ul { margin: 0; padding: 0; list-style: none; }
+    img { max-width: 100%; display: block; }
+
+    .container {
+      width: min(100% - 2rem, var(--container));
+      margin-inline: auto;
+    }
+
+    /* Header */
+    .header {
+      position: fixed;
+      inset: 0 0 auto;
+      z-index: 100;
+      height: var(--header-h);
+      transition: background var(--transition), border-color var(--transition), backdrop-filter var(--transition);
+    }
+    .header--scrolled {
+      background: var(--header-bg);
+      -webkit-backdrop-filter: blur(12px);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      box-shadow: 0 1px 12px var(--shadow);
+    }
+    .header__inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 100%;
+    }
+    .header__logo {
+      font-weight: 700;
+      font-size: 1.1rem;
+      letter-spacing: -.02em;
+    }
+    .header__nav { display: flex; gap: 2rem; }
+    .header__link {
+      font-size: .9rem;
+      color: var(--text-muted);
+      transition: color var(--transition);
+    }
+    .header__link:hover { color: var(--text); }
+
+    /* Hero */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding-top: var(--header-h);
+      overflow: hidden;
+    }
+    .hero__inner {
+      position: relative;
+      z-index: 1;
+      padding-block: 4rem;
+    }
+    .hero__eyebrow {
+      font-family: var(--mono);
+      font-size: .85rem;
+      color: var(--accent);
+      letter-spacing: .04em;
+      text-transform: uppercase;
+      margin: 0 0 1rem;
+    }
+    .hero__title {
+      font-size: clamp(2.5rem, 6vw, 4rem);
+      font-weight: 700;
+      line-height: 1.1;
+      letter-spacing: -.03em;
+      margin: 0 0 1.25rem;
+      max-width: 14ch;
+    }
+    .hero__name {
+      background: linear-gradient(135deg, var(--text) 0%, var(--accent) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hero__tagline {
+      font-size: 1.15rem;
+      color: var(--text-muted);
+      max-width: 52ch;
+      margin: 0 0 2rem;
+    }
+    .hero__stack {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .6rem;
+      margin-bottom: 2.5rem;
+    }
+    .hero__pill {
+      font-family: var(--mono);
+      font-size: .8rem;
+      padding: .4rem .85rem;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: var(--accent);
+      border: 1px solid var(--accent-border);
+    }
+    .hero__actions { display: flex; flex-wrap: wrap; gap: 1rem; }
+    .hero__glow {
+      position: absolute;
+      top: -20%;
+      right: -10%;
+      width: 60%;
+      height: 80%;
+      background: radial-gradient(ellipse at center, var(--accent-glow) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: .75rem 1.5rem;
+      font-size: .95rem;
+      font-weight: 600;
+      border-radius: var(--radius);
+      transition: background var(--transition), color var(--transition), border-color var(--transition), transform var(--transition);
+    }
+    .btn--primary { background: var(--accent); color: var(--btn-text); }
+    .btn--primary:hover { background: var(--accent-light); transform: translateY(-1px); }
+    .btn--ghost { border: 1px solid var(--border); color: var(--text); }
+    .btn--ghost:hover { background: var(--surface-hover); border-color: var(--accent-border); }
+
+    /* Sections */
+    .section { padding-block: 5rem; }
+    .section--alt { background: var(--bg-alt); }
+    .section__header { margin-bottom: 2.5rem; }
+    .section__label {
+      display: block;
+      font-family: var(--mono);
+      font-size: .8rem;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      margin-bottom: .5rem;
+    }
+    .section__title {
+      font-size: clamp(1.75rem, 4vw, 2.25rem);
+      font-weight: 700;
+      letter-spacing: -.02em;
+      margin: 0;
+    }
+    .about__text {
+      font-size: 1.1rem;
+      color: var(--text-muted);
+      max-width: 65ch;
+      margin: 0;
+      line-height: 1.75;
+    }
+
+    /* Skills */
+    .skills__intro {
+      margin: 1rem 0 0;
+      font-size: 1.05rem;
+      color: var(--text-muted);
+      max-width: 55ch;
+      line-height: 1.65;
+    }
+    .skills__intro strong { color: var(--accent); font-weight: 600; }
+    .skills__categories { display: flex; flex-direction: column; gap: 1.5rem; }
+    .skill-category {
+      padding: 1.75rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      transition: border-color var(--transition);
+    }
+    .skill-category:hover { border-color: var(--accent-border); }
+    .skill-category__header { margin-bottom: 1.25rem; }
+    .skill-category__title { font-size: 1.15rem; font-weight: 600; margin: 0 0 .35rem; }
+    .skill-category__desc { font-size: .9rem; color: var(--text-muted); margin: 0; line-height: 1.5; }
+    .skill-category__tags { display: flex; flex-wrap: wrap; gap: .55rem; }
+    .skill-tag {
+      font-family: var(--mono);
+      font-size: .78rem;
+      padding: .4rem .75rem;
+      border-radius: 8px;
+      background: var(--accent-soft);
+      color: var(--text);
+      border: 1px solid var(--accent-border);
+      transition: border-color var(--transition), background var(--transition);
+    }
+    .skill-tag:hover { border-color: var(--accent-border-strong); background: var(--accent-soft); }
+
+    /* Timeline */
+    .timeline { display: flex; flex-direction: column; gap: 0; }
+    .timeline__item { display: grid; grid-template-columns: 32px 1fr; gap: 1.5rem; }
+    .timeline__marker { display: flex; flex-direction: column; align-items: center; padding-top: .35rem; }
+    .timeline__dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 0 4px var(--accent-soft);
+      flex-shrink: 0;
+    }
+    .timeline__line {
+      width: 2px;
+      flex: 1;
+      min-height: 2rem;
+      background: var(--border);
+      margin-block: .5rem;
+    }
+    .timeline__content { padding-bottom: 2.5rem; }
+    .timeline__item:last-child .timeline__content { padding-bottom: 0; }
+    .timeline__meta { display: flex; flex-wrap: wrap; gap: .75rem 1.5rem; margin-bottom: .5rem; }
+    .timeline__period { font-family: var(--mono); font-size: .8rem; color: var(--accent); }
+    .timeline__location { font-size: .85rem; color: var(--text-muted); }
+    .timeline__role { font-size: 1.2rem; font-weight: 600; margin: 0 0 .15rem; }
+    .timeline__company { font-size: 1rem; color: var(--text-muted); margin: 0 0 1rem; }
+    .timeline__highlights { display: flex; flex-direction: column; gap: .5rem; }
+    .timeline__highlights li {
+      position: relative;
+      padding-left: 1.25rem;
+      font-size: .95rem;
+      color: var(--text-muted);
+      line-height: 1.55;
+    }
+    .timeline__highlights li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: .55em;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+      opacity: .6;
+    }
+
+    /* Projects */
+    .projects__intro {
+      margin: 1rem 0 0;
+      font-size: 1.05rem;
+      color: var(--text-muted);
+      max-width: 55ch;
+      line-height: 1.65;
+    }
+    .projects__grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 1.5rem;
+    }
+    .project-card {
+      display: flex;
+      flex-direction: column;
+      padding: 1.75rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      transition: border-color var(--transition), transform var(--transition), box-shadow var(--transition);
+      text-align: left;
+    }
+    .project-card:hover {
+      border-color: var(--accent-border-strong);
+      transform: translateY(-3px);
+      box-shadow: 0 12px 32px var(--shadow);
+    }
+    .project-card__header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: .5rem;
+      margin-bottom: 1rem;
+    }
+    .project-card__company {
+      font-family: var(--mono);
+      font-size: .75rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: .06em;
+      color: var(--accent);
+    }
+    .project-card__period {
+      font-family: var(--mono);
+      font-size: .72rem;
+      color: var(--text-muted);
+    }
+    .project-card__title {
+      font-size: 1.15rem;
+      font-weight: 600;
+      line-height: 1.35;
+      margin: 0 0 .35rem;
+      letter-spacing: -.01em;
+    }
+    .project-card__role { font-size: .85rem; color: var(--text-muted); margin: 0 0 1rem; }
+    .project-card__desc {
+      font-size: .92rem;
+      color: var(--text-muted);
+      line-height: 1.65;
+      margin: 0 0 1.25rem;
+      flex: 1;
+    }
+    .project-card__outcomes {
+      display: flex;
+      flex-direction: column;
+      gap: .45rem;
+      margin: 0 0 1.25rem;
+    }
+    .project-card__outcomes li {
+      position: relative;
+      padding-left: 1.1rem;
+      font-size: .88rem;
+      color: var(--text);
+      line-height: 1.5;
+    }
+    .project-card__outcomes li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: .55em;
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--accent);
+    }
+    .project-card__stack {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .45rem;
+      margin: auto 0 0;
+      padding: 0;
+    }
+    .project-card__tag {
+      font-family: var(--mono);
+      font-size: .7rem;
+      padding: .3rem .6rem;
+      border-radius: 6px;
+      background: var(--accent-soft);
+      color: var(--text-muted);
+      border: 1px solid var(--accent-border);
+    }
+
+    /* Education */
+    .education-item {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      align-items: baseline;
+      padding: 1.75rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+    }
+    .education-item h3 { margin: 0; font-size: 1.05rem; }
+    .education-item p { margin: .25rem 0 0; color: var(--text-muted); font-size: .93rem; }
+    .education-item .date {
+      font-family: var(--mono);
+      font-size: .8rem;
+      color: var(--accent);
+      white-space: nowrap;
+    }
+
+    /* Contact / Footer */
+    .contact {
+      text-align: center;
+      padding-block: 6rem;
+    }
+    .contact__title {
+      font-size: clamp(1.75rem, 4vw, 2.5rem);
+      font-weight: 700;
+      letter-spacing: -.02em;
+      margin: 0 0 1rem;
+    }
+    .contact__text {
+      font-size: 1.05rem;
+      color: var(--text-muted);
+      max-width: 55ch;
+      margin: 0 auto 2rem;
+      line-height: 1.7;
+    }
+    .contact__links {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1rem;
+    }
+    .contact__link {
+      font-family: var(--mono);
+      font-size: .85rem;
+      padding: .6rem 1.2rem;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      transition: border-color var(--transition), background var(--transition);
+    }
+    .contact__link:hover {
+      border-color: var(--accent-border-strong);
+      background: var(--accent-soft);
+    }
+
+    /* Responsive */
+    @media (max-width: 720px) {
+      .header__nav { display: none; }
+      .hero { min-height: auto; padding-block: 6rem 4rem; }
+      .section { padding-block: 3.5rem; }
+      .timeline__item { grid-template-columns: 24px 1fr; gap: 1rem; }
+      .education-item { flex-direction: column; gap: 4px; }
+      .education-item .date { white-space: normal; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { transition: none !important; animation: none !important; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="header" id="header">
+    <div class="container header__inner">
+      <a href="#" class="header__logo">G. Heredia</a>
+      <nav class="header__nav">
+        <a href="#about" class="header__link">About</a>
+        <a href="#skills" class="header__link">Skills</a>
+        <a href="#experience" class="header__link">Experience</a>
+        <a href="#projects" class="header__link">Highlights</a>
+        <a href="#contact" class="header__link">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- HERO -->
+    <section class="hero">
+      <div class="container hero__inner">
+        <p class="hero__eyebrow">Senior Software Engineer · 11+ years</p>
+        <h1 class="hero__title">Hi, I'm <span class="hero__name">Gerardo Heredia Azcarate</span></h1>
+        <p class="hero__tagline">
+          Senior engineer specializing in distributed systems, cloud-native architecture, and AI-powered applications.
+          I design and deliver scalable, reliable software across enterprise and healthcare domains.
+        </p>
+        <div class="hero__stack">
+          <span class="hero__pill">Java</span>
+          <span class="hero__pill">Python</span>
+          <span class="hero__pill">.NET Core</span>
+          <span class="hero__pill">AWS · Azure · GCP</span>
+          <span class="hero__pill">Kubernetes</span>
+          <span class="hero__pill">OpenAI / LLMs</span>
+        </div>
+        <div class="hero__actions">
+          <a href="#experience" class="btn btn--primary">View Experience</a>
+          <a href="#skills" class="btn btn--ghost">View Skills</a>
+        </div>
+      </div>
+      <div class="hero__glow" aria-hidden="true"></div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about" class="section">
+      <div class="container">
+        <div class="section__header">
+          <span class="section__label">About</span>
+          <h2 class="section__title">Engineering with purpose</h2>
+        </div>
+        <p class="about__text">
+          Senior Software Engineer with <strong>11+ years</strong> of experience designing, architecting, and delivering
+          scalable enterprise applications and distributed systems. Strong expertise in backend engineering, microservices,
+          event-driven architectures, and cloud-native solutions using Java, Python, .NET Core, Node.js, AWS, Azure, and GCP.
+          Proven track record of modernizing legacy systems, building secure RESTful APIs, implementing AI-powered applications
+          with OpenAI and Anthropic LLMs, and developing production-grade automation and integration solutions. Adept at leading
+          complex technical initiatives, solving challenging engineering problems, and delivering reliable, high-performance
+          solutions across diverse business domains.
+        </p>
+      </div>
+    </section>
+
+    <!-- SKILLS -->
+    <section id="skills" class="section section--alt">
+      <div class="container">
+        <div class="section__header">
+          <span class="section__label">Stack</span>
+          <h2 class="section__title">Skills & technologies</h2>
+          <p class="skills__intro">
+            11+ years across senior software and full-stack roles — centered on
+            <strong>Java</strong>, <strong>Python</strong>, <strong>.NET Core</strong>, and <strong>cloud-native architecture</strong>.
+          </p>
+        </div>
+
+        <div class="skills__categories">
+          <article class="skill-category">
+            <div class="skill-category__header">
+              <h3 class="skill-category__title">Programming Languages</h3>
+              <p class="skill-category__desc">Core languages across backend, frontend, and data workloads</p>
+            </div>
+            <ul class="skill-category__tags">
+              <li class="skill-tag">Java</li>
+              <li class="skill-tag">Python</li>
+              <li class="skill-tag">C#</li>
+              <li class="skill-tag">JavaScript</li>
+              <li class="skill-tag">TypeScript</li>
+              <li class="skill-tag">SQL</li>
+            </ul>
+          </article>
+
+          <article class="skill-category">
+            <div class="skill-category__header">
+              <h3 class="skill-category__title">Backend & API Development</h3>
+              <p class="skill-category__desc">RESTful services, microservices, and integration patterns</p>
+            </div>
+            <ul class="skill-category__tags">
+              <li class="skill-tag">.NET Core</li>
+              <li class="skill-tag">Node.js</li>
+              <li class="skill-tag">Spring Boot</li>
+              <li class="skill-tag">RESTful APIs</li>
+              <li class="skill-tag">Microservices</li>
+              <li class="skill-tag">GraphQL</li>
+              <li class="skill-tag">Webhooks</li>
+              <li class="skill-tag">API Integration</li>
+            </ul>
+          </article>
+
+          <article class="skill-category">
+            <div class="skill-category__header">
+              <h3 class="skill-category__title">Software Architecture</h3>
+              <p class="skill-category__desc">System design, patterns, and modernization at scale</p>
+            </div>
+            <ul class="skill-category__tags">
+              <li class="skill-tag">Distributed Systems</li>
+              <li class="skill-tag">Event-Driven Architecture</li>
+              <li class="skill-tag">Domain-Driven Design</li>
+              <li class="skill-tag">System Design</li>
+              <li class="skill-tag">Design Patterns</li>
+              <li class="skill-tag">Legacy Modernization</li>
+            </ul>
+          </article>
+
+          <article class="skill-category">
+            <div class="skill-category__header">
+              <h3 class="skill-category__title">Cloud & Infrastructure</h3>
+              <p class="skill-category__desc">Multi-cloud engineering, containers, and serverless</p>
+            </div>
+            <ul class="skill-category__tags">
+              <li class="skill-tag">AWS</li>
+              <li class="skill-tag">Microsoft Azure</li>
+              <li class="skill-tag">GCP</li>
+              <li class="skill-tag">Docker</li>
+              <li class="skill-tag">Kubernetes</li>
+              <li class="skill-tag">Amazon EKS</li>
+              <li class="skill-tag">Azure AKS</li>
+              <li class="skill-tag">AWS Lambda</li>
+              <li class="skill-tag">Azure Functions</li>
+            </ul>
+          </article>
+
+          <article class="skill-category">
+            <div class="skill-category__header">
+              <h3 class="skill-category__title">AI & ML Integration</h3>
+              <p class="skill-category__desc">Production LLM applications, RAG, and agent workflows</p>
+            </div>
+            <ul class="skill-category__tags">
+              <li class="skill-tag">OpenAI</li>
+              <li class="skill-tag">Anthropic Claude</li>
+              <li class="skill-tag">LLMs</li>
+              <li class="skill-tag">RAG</li>
+              <li class="skill-tag">AI Agents</li>
+              <li class="skill-tag">MCP</li>
+              <li class="skill-tag">Embeddings</li>
+              <li class="skill-tag">Prompt Engineering</li>
+            </ul>
+          </article>
+
+          <article class="skill-category">
+            <div class="skill-category__header">
+              <h3 class="skill-category__title">Databases & Data Management</h3>
+              <p class="skill-category__desc">Relational and in-memory stores for production workloads</p>
+            </div>
+            <ul class="skill-category__tags">
+              <li class="skill-tag">PostgreSQL</li>
+              <li class="skill-tag">SQL Server</li>
+              <li class="skill-tag">MySQL</li>
+              <li class="skill-tag">Redis</li>
+              <li class="skill-tag">Database Design</li>
+              <li class="skill-tag">Query Optimization</li>
+            </ul>
+          </article>
+
+          <article class="skill-category">
+            <div class="skill-category__header">
+              <h3 class="skill-category__title">DevOps & CI/CD</h3>
+              <p class="skill-category__desc">Infrastructure as code and repeatable delivery pipelines</p>
+            </div>
+            <ul class="skill-category__tags">
+              <li class="skill-tag">Terraform</li>
+              <li class="skill-tag">Infrastructure as Code</li>
+              <li class="skill-tag">GitLab CI/CD</li>
+              <li class="skill-tag">Git</li>
+              <li class="skill-tag">Automated Deployment</li>
+              <li class="skill-tag">Continuous Integration</li>
+              <li class="skill-tag">Continuous Delivery</li>
+            </ul>
+          </article>
+
+          <article class="skill-category">
+            <div class="skill-category__header">
+              <h3 class="skill-category__title">Frontend Development</h3>
+              <p class="skill-category__desc">Enterprise web interfaces and client-side logic</p>
+            </div>
+            <ul class="skill-category__tags">
+              <li class="skill-tag">Angular</li>
+              <li class="skill-tag">TypeScript</li>
+              <li class="skill-tag">JavaScript</li>
+              <li class="skill-tag">HTML5</li>
+              <li class="skill-tag">CSS3</li>
+            </ul>
+          </article>
+
+          <article class="skill-category">
+            <div class="skill-category__header">
+              <h3 class="skill-category__title">Security & Enterprise Engineering</h3>
+              <p class="skill-category__desc">Access control, multi-tenancy, and compliance</p>
+            </div>
+            <ul class="skill-category__tags">
+              <li class="skill-tag">OAuth 2.0</li>
+              <li class="skill-tag">Authentication</li>
+              <li class="skill-tag">Authorization</li>
+              <li class="skill-tag">Multi-Tenant Architecture</li>
+              <li class="skill-tag">Data Protection</li>
+              <li class="skill-tag">Audit Logging</li>
+              <li class="skill-tag">FHIR R4</li>
+            </ul>
+          </article>
+
+          <article class="skill-category">
+            <div class="skill-category__header">
+              <h3 class="skill-category__title">Testing & Observability</h3>
+              <p class="skill-category__desc">Automated testing, monitoring, and distributed tracing</p>
+            </div>
+            <ul class="skill-category__tags">
+              <li class="skill-tag">JUnit</li>
+              <li class="skill-tag">Mockito</li>
+              <li class="skill-tag">Jest</li>
+              <li class="skill-tag">Automated Testing</li>
+              <li class="skill-tag">Datadog</li>
+              <li class="skill-tag">Distributed Tracing</li>
+              <li class="skill-tag">Application Monitoring</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- EXPERIENCE -->
+    <section id="experience" class="section">
+      <div class="container">
+        <div class="section__header">
+          <span class="section__label">Career</span>
+          <h2 class="section__title">Experience</h2>
+        </div>
+
+        <div class="timeline">
+          <!-- Plenumsoft -->
+          <div class="timeline__item">
+            <div class="timeline__marker">
+              <div class="timeline__dot"></div>
+              <div class="timeline__line"></div>
+            </div>
+            <div class="timeline__content">
+              <div class="timeline__meta">
+                <span class="timeline__period">Jun 2022 – Present</span>
+                <span class="timeline__location">Mérida, Yucatán, México</span>
+              </div>
+              <h3 class="timeline__role">Senior Software Engineer</h3>
+              <p class="timeline__company">Plenumsoft</p>
+              <ul class="timeline__highlights">
+                <li>Architected enterprise distributed systems using Java, .NET Core, and Python, delivering high-performance microservices and secure RESTful APIs.</li>
+                <li>Designed scalable event-driven architectures and Domain-Driven Designs (DDD) via asynchronous messaging to enable independent, seamless deployments.</li>
+                <li>Engineered multi-cloud architectures across AWS, Azure, and GCP using container orchestration (EKS, AKS, Docker) and serverless components (Lambda, Azure Functions).</li>
+                <li>Led application modernization initiatives, successfully decomposing legacy monoliths into decoupled, backward-compatible services with strict API contracts.</li>
+                <li>Built production AI applications using OpenAI/Anthropic LLMs, implementing Retrieval-Augmented Generation (RAG), embeddings, and structured outputs.</li>
+                <li>Pioneered secure AI agent orchestration and MCP integrations with scoped permissions, audit logging, and human-in-the-loop workflows.</li>
+                <li>Automated CI/CD pipelines and Infrastructure as Code (IaC) utilizing Terraform, Kubernetes, and GitLab CI/CD to accelerate deployment velocity.</li>
+                <li>Enforced secure multi-tenant isolation and enterprise-grade access controls, standardizing authentication and authorization across isolated client environments.</li>
+                <li>Enhanced system observability by implementing distributed tracing, Datadog monitoring, PostgreSQL database optimization, and automated testing (JUnit, Mockito, Jest).</li>
+                <li>Spearheaded healthcare interoperability by implementing FHIR R4 and HAPI FHIR protocols for secure, compliant partner data exchange.</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Walook -->
+          <div class="timeline__item">
+            <div class="timeline__marker">
+              <div class="timeline__dot"></div>
+              <div class="timeline__line"></div>
+            </div>
+            <div class="timeline__content">
+              <div class="timeline__meta">
+                <span class="timeline__period">Sep 2017 – May 2022</span>
+                <span class="timeline__location">Mérida, Yucatán, México</span>
+              </div>
+              <h3 class="timeline__role">Full Stack Engineer</h3>
+              <p class="timeline__company">Walook</p>
+              <ul class="timeline__highlights">
+                <li>Built Python and Node.js services for a B2B logistics platform, handling order intake and partner API integrations that broke whenever a carrier changed its payload format.</li>
+                <li>Migrated legacy Java modules to a lighter service layer, keeping the old endpoints alive during cutover so live shipments never stalled.</li>
+                <li>Rebuilt the internal operations UI in Angular and TypeScript, replacing a slow screen that dispatchers avoided during peak hours.</li>
+                <li>Tuned PostgreSQL indexes and query plans on reporting tables, which had grown sluggish as shipment history piled up.</li>
+                <li>Set up AWS infrastructure with Terraform and CI/CD pipelines, so releases moved from manual deploys to a repeatable process.</li>
+                <li>Added webhook retries and dead-letter handling for partner callbacks, cutting silent failures that used to surface as missing orders.</li>
+                <li>Built Python and JavaScript features for client web applications, working directly with account managers to turn rough requirements into shipped screens.</li>
+                <li>Maintained Java backend modules on older client systems, patching integration bugs that surfaced when third-party feeds changed format.</li>
+                <li>Wrote SQL queries and reports for internal dashboards, cleaning up slow joins that made the weekly numbers arrive late.</li>
+                <li>Handled API integrations between client systems and payment or messaging providers, adding retry logic when callbacks dropped.</li>
+                <li>Set up early CI/CD scripts and Git workflows for the team, replacing manual FTP deploys with a repeatable release step.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROJECTS / HIGHLIGHTS -->
+    <section id="projects" class="section section--alt">
+      <div class="container">
+        <div class="section__header">
+          <span class="section__label">Selected work</span>
+          <h2 class="section__title">Engineering highlights</h2>
+          <p class="projects__intro">
+            A few flagship initiatives that reflect the scale, complexity, and impact of my engineering work.
+          </p>
+        </div>
+
+        <div class="projects__grid">
+          <!-- Project 1 -->
+          <article class="project-card">
+            <div class="project-card__header">
+              <span class="project-card__company">Plenumsoft</span>
+              <span class="project-card__period">2022 – Present</span>
+            </div>
+            <h3 class="project-card__title">Multi-Cloud Event-Driven Platform Modernization</h3>
+            <p class="project-card__role">Senior Software Engineer</p>
+            <p class="project-card__desc">
+              Led decomposition of a legacy monolith into event-driven microservices across AWS, Azure, and GCP.
+              Implemented container orchestration with EKS/AKS and serverless components, enabling independent deployments
+              and reducing release friction. Established strict API contracts to maintain backward compatibility during cutover.
+            </p>
+            <ul class="project-card__outcomes">
+              <li>Decoupled monolith into independently deployable services</li>
+              <li>Standardized multi-cloud container and serverless patterns</li>
+              <li>Maintained backward compatibility with strict API contracts</li>
+            </ul>
+            <ul class="project-card__stack">
+              <li class="project-card__tag">Java</li>
+              <li class="project-card__tag">.NET Core</li>
+              <li class="project-card__tag">Python</li>
+              <li class="project-card__tag">Kubernetes</li>
+              <li class="project-card__tag">Terraform</li>
+              <li class="project-card__tag">GitLab CI/CD</li>
+            </ul>
+          </article>
+
+          <!-- Project 2 -->
+          <article class="project-card">
+            <div class="project-card__header">
+              <span class="project-card__company">Plenumsoft</span>
+              <span class="project-card__period">2022 – Present</span>
+            </div>
+            <h3 class="project-card__title">Production AI Application with RAG & Agent Orchestration</h3>
+            <p class="project-card__role">Senior Software Engineer</p>
+            <p class="project-card__desc">
+              Built and shipped LLM-powered applications using OpenAI and Anthropic, implementing Retrieval-Augmented
+              Generation (RAG), embeddings, and structured outputs. Pioneered secure AI agent orchestration with MCP
+              integrations, scoped permissions, audit logging, and human-in-the-loop workflows.
+            </p>
+            <ul class="project-card__outcomes">
+              <li>Shipped production RAG pipeline with structured outputs</li>
+              <li>Implemented scoped-permission AI agent orchestration</li>
+              <li>Added audit logging and human-in-the-loop controls</li>
+            </ul>
+            <ul class="project-card__stack">
+              <li class="project-card__tag">Python</li>
+              <li class="project-card__tag">OpenAI</li>
+              <li class="project-card__tag">Anthropic Claude</li>
+              <li class="project-card__tag">RAG</li>
+              <li class="project-card__tag">MCP</li>
+              <li class="project-card__tag">Embeddings</li>
+            </ul>
+          </article>
+
+          <!-- Project 3 -->
+          <article class="project-card">
+            <div class="project-card__header">
+              <span class="project-card__company">Plenumsoft</span>
+              <span class="project-card__period">2022 – Present</span>
+            </div>
+            <h3 class="project-card__title">Healthcare Interoperability with FHIR R4</h3>
+            <p class="project-card__role">Senior Software Engineer</p>
+            <p class="project-card__desc">
+              Spearheaded FHIR R4 and HAPI FHIR implementation for secure, compliant partner data exchange.
+              Enforced multi-tenant isolation and enterprise-grade access controls across isolated client environments.
+            </p>
+            <ul class="project-card__outcomes">
+              <li>Delivered compliant FHIR R4 partner data exchange</li>
+              <li>Enforced multi-tenant isolation and access controls</li>
+              <li>Standardized authentication and authorization across tenants</li>
+            </ul>
+            <ul class="project-card__stack">
+              <li class="project-card__tag">Java</li>
+              <li class="project-card__tag">FHIR R4</li>
+              <li class="project-card__tag">HAPI FHIR</li>
+              <li class="project-card__tag">OAuth 2.0</li>
+              <li class="project-card__tag">Multi-Tenant Architecture</li>
+              <li class="project-card__tag">Audit Logging</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- EDUCATION -->
+    <section id="education" class="section">
+      <div class="container">
+        <div class="section__header">
+          <span class="section__label">Education</span>
+          <h2 class="section__title">Academic background</h2>
+        </div>
+        <div class="education-item">
+          <div>
+            <h3>Autonomous University of Yucatan</h3>
+            <p>B.S. in Computer Science · Mérida, Yucatán, México</p>
+          </div>
+          <div class="date">Sep 2011 – Aug 2014</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="section section--alt">
+      <div class="container contact">
+        <span class="section__label">Contact</span>
+        <h2 class="contact__title">Let’s build reliable, high-performance systems.</h2>
+        <p class="contact__text">
+          Open to conversations about distributed systems, cloud architecture, AI-powered applications,
+          and enterprise modernization.
+        </p>
+        <div class="contact__links">
+          <a href="mailto:geraldovourpartner@gmail.com" class="contact__link">geraldovourpartner@gmail.com</a>
+          <a href="https://www.linkedin.com/in/gerardo-heredia-azcarate-1b6877249" target="_blank" rel="noopener" class="contact__link">LinkedIn</a>
+          <a href="tel:+529994563473" class="contact__link">+52 999 456 3473</a>
+          <span class="contact__link">Mérida, Yucatán, México</span>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    // Add scrolled state to header for the frosted-glass effect
+    const header = document.getElementById('header');
+    const onScroll = () => {
+      header.classList.toggle('header--scrolled', window.scrollY > 10);
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+  </script>
+</body>
+</html>
